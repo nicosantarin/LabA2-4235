@@ -18,7 +18,7 @@ app.disable('x-powered-by');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
-app.set('view engine', handlebars);
+app.set('view engine', 'handlebars');
 
 
 //more imports
@@ -27,8 +27,22 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
+//routes
 app.get('/', function(req, res){
- 
   // Point at the home.handlebars view
   res.render('home');
+});
+
+app.get('/about', function(req, res){
+  // Point at the about.handlebars view
+  res.render('about');
+});
+
+
+
+
+
+app.listen(app.get('port'), function(){
+  console.log('Express started on http://localhost:' +
+    app.get('port') + '; press Ctrl-C to terminate');
 });
